@@ -4,11 +4,10 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 router.get('/', async (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
+  // find all tags and include their associated Product data
   try {
-    const tagsData = await Tag.findAll({
-      include: [{model: Product}, {model: ProductTag}],
+    const tagData = await Tag.findAll({
+      include: [{model: Product}],
     });
     res.status(200).json(tagData);
   } catch (err) {
@@ -17,15 +16,14 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+  // find a single tag by its `id` and include its associated Product data
   try {
     const tagData = await Tag.findByPk(req.params.id, {
-      include: [{model: Product}, {model: ProductTag}],
+      include: [{model: Product}],
     });
 
     if (!tagData) {
-      res.status(404).json({ message: 'No category found with that id'});
+      res.status(404).json({ message: 'No tag found with that id'});
       return;
     }
 
@@ -45,22 +43,18 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
+// update tag
+router.put('/:id', (req, res) => {
+  // update tag data
   try {
-    const tagData = await Tag.update(
-      { tag_name: req.body },
-      { where: req.params.id }
-    );
-
-    if (!tagData) {
-      res.status(404).json({ message: 'No tag found with that id'})
-      return;
-    }
-
-    res.status(200).json(tagData);
+    const tagData = Tag.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(`tag with id of ${req.params.id} has been updated`);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
@@ -78,7 +72,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(tagData);
+    res.status(200).json(`Deleted tag with id ${req.params.id}`);
   } catch (err) {
     res.status(500).json(err);
   }

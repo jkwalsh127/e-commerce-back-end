@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // find all products and include their associated Category and Tag data
   try {
     const productData = await Product.findAll({
-      include: [{ model: Category }, { model: Tag , through: ProductTag, as: 'product_tag'}],
+      include: [{ model: Category }, { model: Tag}],
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id` and include its associated Category and Tag data
   try {
     const productData = await Product.findByPk(req.params.id, {
-      include: [{ model: Category }, { model: Tag , through: ProductTag, as: 'product_tag'}],
+      include: [{ model: Category }, { model: Tag}],
     });
 
     if (!productData) {
@@ -102,7 +102,7 @@ router.put('/:id', (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.json(`product with id of ${req.params.id} has been updated`))
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);
@@ -123,7 +123,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(productData);
+    res.status(200).json(`Deleted product with id ${req.params.id}`);
   } catch (err) {
     res.status(500).json(err);
   }
