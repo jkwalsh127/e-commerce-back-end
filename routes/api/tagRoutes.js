@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
         id: req.params.id,
       },
     });
-    res.status(200).json(`tag with id of ${req.params.id} has been updated`);
+    res.status(200).json(tagData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -72,7 +72,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(`Deleted tag with id ${req.params.id}`);
+    res.status(200).json(tagData);
   } catch (err) {
     res.status(500).json(err);
   }
