@@ -28,7 +28,7 @@ To install locally, first clone this repository onto your machine. Once the cont
 First, the databse must be set up. To do this, run the command "mysql -u root -p". You will be prompted for your MySQL password. Once entered, you can run the command "source db/schema.sql;" to create the database. Now, run the command "quit" to exit mysql.
 Now that the database is created, we can add the data. Running the command "npm run seed" will create the tables according to the sequelize models, and then fill the tables with seed data. From there, the command "npm start" will boot the server. Note that starting the server will create the tables if none exist. From here, insomnia can be used to interact with the data. Standard requests are set up there to query the database through the established routes. GET, POST, PUT, and DEL requests are used to manipulate data from each table. Follow the video below to see how this is done. 
 
-<iframe src="https://drive.google.com/file/d/1oyuTNSg4DWFZOihn-fCVU7Y69hGqU64c/preview" width="640" height="480"></iframe>
+https://user-images.githubusercontent.com/101354032/167064761-f6c1081c-d98f-4dc8-a39a-fa5381d209fa.mp4
 
 ## Credits
 This was a solo project meant to built from scratch, the idea provided by staff at the UC Berkeley full-stack coding bootcamp.
