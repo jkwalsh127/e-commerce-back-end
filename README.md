@@ -9,7 +9,7 @@
 |   |   |  MySQL2 |   |
 |   |   |  dotenv |   |
 
-# Table of contents
+## Table of contents
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
